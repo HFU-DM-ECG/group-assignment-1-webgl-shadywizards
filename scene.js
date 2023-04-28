@@ -129,6 +129,7 @@ controls.update()
 function animate() {
 	time += 1;
 	sphereMaterial.uniforms.time.value = time;
+	glowMaterial.uniforms.time.value = time;
 	requestAnimationFrame(animate);
 	controls.update();
 	renderer.render(scene, camera);
