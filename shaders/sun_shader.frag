@@ -1,3 +1,8 @@
+//! eyeVector at 54:00
+
+
+varying vec3 vNormal;
+varying vec3 eyeVector;
 varying vec3 gridPos;
 uniform float time;
 
@@ -159,6 +164,15 @@ float cnoise(vec4 P)
 }
 //----------------------------------------------------------------
 
+vec3 brightnessToColor(float b) {
+    b *= 0.25;
+    return (vec3(b, b*b, b*b*b*b) / 0.25) * 0.8;
+}
+
+float Fresnel(vec3 eyevector, vec3 worldNormal) {
+    return pow(1.0 + dot(eyevector, worldNormal), 3.0);
+}
+
 float fbm(vec4 p) {
     float sum = 0.;
     float amp = 1.;
@@ -211,9 +225,15 @@ float create_spots(vec3 pos, float t) {
 }
 
 void main() {
-    vec3 color = burn_effect_00(gridPos, time*0.001);
-    color += burn_effect_01(gridPos, time*0.001);
-    float spots = create_spots(gridPos, time*0.001);
+    // vec3 color = burn_effect_00(gridPos, time*0.0008);
+    // color += burn_effect_01(gridPos, time*0.0004);
+    // float spots = create_spots(gridPos, time*0.001);
+
+    float brightness = fbm(vec4(gridPos*5., time*0.0008));
+    vec3 color = brightnessToColor(brightness);
+
+    float fres = Fresnel(eyeVector, vNormal);
+
     gl_FragColor = vec4(color, 1.0);
-    gl_FragColor *= mix(1., spots, 0.1);
+    // gl_FragColor *= mix(1., spots, 0.1);
 }

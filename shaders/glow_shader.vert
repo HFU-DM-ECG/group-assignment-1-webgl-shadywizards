@@ -1,8 +1,8 @@
-varying vec3 gridPos;
+varying vec3 pos;
 uniform float time;
 
 
 void main() {
-    gridPos = position.xyz;
+    pos = position.xyz;
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
