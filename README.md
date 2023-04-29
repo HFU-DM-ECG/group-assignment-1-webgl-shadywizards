@@ -21,3 +21,5 @@ In order to load a 3D model, [three.js](https://threejs.org) can be used. Follow
 
 # ToDo
 *Replace this readme with a proper readme for your project* 
+
+Sun shader uses a layered noise function combined with a Fresnel function to achieve the effect of a burning sun. The glow around the sun is another sphere, rendered behind the sun-sphere that turns brightness values into color values, the brightness is determined by the radius of the glow-sphere.
