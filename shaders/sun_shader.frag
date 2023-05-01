@@ -230,9 +230,10 @@ void main() {
     // float spots = create_spots(gridPos, time*0.001);
 
     float brightness = fbm(vec4(gridPos*5., time*0.0008));
-    vec3 color = brightnessToColor(brightness);
-
     float fres = Fresnel(eyeVector, vNormal);
+    brightness += pow(fres, 0.1);
+
+    vec3 color = brightnessToColor(brightness);
 
     gl_FragColor = vec4(color, 1.0);
     // gl_FragColor *= mix(1., spots, 0.1);
