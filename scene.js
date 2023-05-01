@@ -22,7 +22,6 @@ const sun = {
 	z: 0
 }
 
-
 const can1 = {
 	rx: 30,
 	ry: 60,
@@ -67,7 +66,6 @@ for (let i = 0; i < 5; i++) {
   coordinates.push({ x, y: 0, z });
 }
 
-
 //shaders
 //sun
 const sunVertexShader = await fetch('./shaders/sun_shader.vert').then(response => response.text());
@@ -88,11 +86,16 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 
 //HDRI for Scene
 new RGBELoader()
-	.load("../Assets/mud_road_puresky_4k.hdr", function (texture) {
+	.load("Assets/galaxy.hdr", function (texture) {
 		texture.mapping = THREE.EquirectangularReflectionMapping;
 		scene.background = texture;
-		scene.environmentn = texture;
+		//scene.environment = texture;
 	});
+new RGBELoader().load("Assets/can.hdr", function (texture) {
+		texture.mapping = THREE.EquirectangularReflectionMapping;
+		scene.environment = texture;
+});
+
 
 //Temporary Light
 const light = new THREE.AmbientLight(0xffffff, 2);
@@ -108,7 +111,6 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.outputEncoding = THREE.sRGBEncoding;
 
-
 //GLTF-Loader for Can
 const loader = new GLTFLoader();
 loader.load('Assets/Can.gltf', function (glb) {
@@ -121,6 +123,21 @@ loader.load('Assets/Can.gltf', function (glb) {
 	root.rotation.x = can1.rx;
 	root.rotation.x = can1.rz;
 	root.rotation.x = can1.ry;
+
+	//metallic effect on can
+	const generator = new THREE.PMREMGenerator(renderer);
+	const envMap = generator.fromScene(scene, 0, 0.1, 100);
+	envMap.mapping = THREE.CubeRefractionMapping;;
+	envMap.texture.encoding = THREE.sRGBEEncoding;
+	root.material = new THREE.MeshPhysicalMaterial({
+		envMap: envMap.texture,
+		envMapIntensity: 1.0,
+		roughness: 0.1,
+		clearcoat: 1.0,
+		clearcoatRoughness: 0.0,
+		metalness: 1.0,
+	});
+
 	scene.add(root);
 	initCan(root);
 	animateCans();
@@ -133,6 +150,7 @@ loader.load('Assets/Can.gltf', function (glb) {
 	console.log("An error occured")
 });
 
+
 loader.load('Assets/Can.gltf', function (glb) {
 	console.log(glb);
 	const root = glb.scene;
@@ -143,6 +161,21 @@ loader.load('Assets/Can.gltf', function (glb) {
 	root.rotation.x = can2.rx;
 	root.rotation.x = can2.rz;
 	root.rotation.x = can2.ry;
+	
+	//metallic effect on can
+	const generator = new THREE.PMREMGenerator(renderer);
+	const envMap = generator.fromScene(scene, 0, 0.1, 100);
+	envMap.mapping = THREE.CubeRefractionMapping;;
+	envMap.texture.encoding = THREE.sRGBEEncoding;
+	root.material = new THREE.MeshPhysicalMaterial({
+		envMap: envMap.texture,
+		envMapIntensity: 1.0,
+		roughness: 0.1,
+		clearcoat: 1.0,
+		clearcoatRoughness: 0.0,
+		metalness: 1.0,
+	});
+
 	scene.add(root);
 	initCan(root);
 	animateCans();
@@ -165,6 +198,21 @@ loader.load('Assets/Can.gltf', function (glb) {
 	root.rotation.x = can3.rx;
 	root.rotation.x = can3.rz;
 	root.rotation.x = can3.ry;
+	
+	//metallic effect on can
+	const generator = new THREE.PMREMGenerator(renderer);
+	const envMap = generator.fromScene(scene, 0, 0.1, 100);
+	envMap.mapping = THREE.CubeRefractionMapping;;
+	envMap.texture.encoding = THREE.sRGBEEncoding;
+	root.material = new THREE.MeshPhysicalMaterial({
+		envMap: envMap.texture,
+		envMapIntensity: 1.0,
+		roughness: 0.1,
+		clearcoat: 1.0,
+		clearcoatRoughness: 0.0,
+		metalness: 1.0,
+	});
+
 	scene.add(root);
 	initCan(root);
 	animateCans();
@@ -187,6 +235,21 @@ loader.load('Assets/Can.gltf', function (glb) {
 	root.rotation.x = can4.rx;
 	root.rotation.x = can4.rz;
 	root.rotation.x = can4.ry;
+	
+	//metallic effect on can
+	const generator = new THREE.PMREMGenerator(renderer);
+	const envMap = generator.fromScene(scene, 0, 0.1, 100);
+	envMap.mapping = THREE.CubeRefractionMapping;;
+	envMap.texture.encoding = THREE.sRGBEEncoding;
+	root.material = new THREE.MeshPhysicalMaterial({
+		envMap: envMap.texture,
+		envMapIntensity: 1.0,
+		roughness: 0.1,
+		clearcoat: 1.0,
+		clearcoatRoughness: 0.0,
+		metalness: 1.0,
+	});
+
 	scene.add(root);
 	initCan(root);
 	animateCans();
@@ -209,6 +272,21 @@ loader.load('Assets/Can.gltf', function (glb) {
 	root.rotation.x = can5.rx;
 	root.rotation.x = can5.rz;
 	root.rotation.x = can5.ry;
+	
+	//metallic effect on can
+	const generator = new THREE.PMREMGenerator(renderer);
+	const envMap = generator.fromScene(scene, 0, 0.1, 100);
+	envMap.mapping = THREE.CubeRefractionMapping;;
+	envMap.texture.encoding = THREE.sRGBEEncoding;
+	root.material = new THREE.MeshPhysicalMaterial({
+		envMap: envMap.texture,
+		envMapIntensity: 1.0,
+		roughness: 0.1,
+		clearcoat: 1.0,
+		clearcoatRoughness: 0.0,
+		metalness: 1.0,
+	});
+
 	scene.add(root);
 	initCan(root);
 	animateCans();
@@ -266,11 +344,10 @@ function animate() {
 	time += 1;
 	sphereMaterial.uniforms.time.value = time;
 	glowMaterial.uniforms.time.value = time;
-	scene
+	scene;
 	requestAnimationFrame(animate);
 	controls.update();
 	renderer.render(scene, camera);
-
 };
 
 let cans = [];

@@ -21,5 +21,7 @@ In order to load a 3D model, [three.js](https://threejs.org) can be used. Follow
 
 # ToDo
 *Replace this readme with a proper readme for your project* 
-
-Sun shader uses a layered noise function combined with a Fresnel function to achieve the effect of a burning sun. The glow around the sun is another sphere, rendered behind the sun-sphere that turns brightness values into color values, the brightness is determined by the radius of the glow-sphere.
+We started with setting up the basic document, including three.js into it. We loaded the can into the scene as an gltf-Object and created a sphere for the sun. For the background we choose a galaxy image. </br>
+The Sun shader uses a layered noise function combined with a Fresnel function to achieve the effect of a burning sun. </br>
+The can has a material to let it shine metallic. </br>
+The cans are animated with rotations, creating a floating effect.
