@@ -279,10 +279,21 @@ function initCan(root) {
 }
 
 function animateCans() {
+	let canCounter = 0;
 	for (const can of cans) {
+		canCounter += 1;
+		const time = Date.now();
+  	const offsetTime = time + 500;
+
 		can.rotation.x = can.rotation.x + .0008;
 		can.rotation.y = can.rotation.y + .0009;
 		can.rotation.z = can.rotation.z + .0003;
+
+		if (canCounter % 2 === 0) {
+			can.position.y = 0.5 + Math.sin(offsetTime * 0.001) * 0.5;
+		} else {
+			can.position.y = Math.sin(time * 0.001) * 0.3;
+		}
 	}
 	requestAnimationFrame(animateCans);
 	renderer.render(scene, camera);
