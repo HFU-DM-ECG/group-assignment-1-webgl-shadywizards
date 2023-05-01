@@ -22,11 +22,51 @@ const sun = {
 	z: 0
 }
 
+
 const can1 = {
-	x: 3,
-	y: 3,
-	z: -1
+	rx: 30,
+	ry: 60,
+	rz: 180,
 }
+
+const can2 = {
+	rx: 90,
+	ry: 20,
+	rz: 0,
+}
+
+const can3 = {
+	rx: 30,
+	ry: 25,
+	rz: 25,
+}
+
+const can4 = {
+	rx: 33,
+	ry: 90,
+	rz: 90,
+}
+
+const can5 = {
+	rx: 5,
+	ry: 20,
+	rz: 100,
+}
+
+// coords spread out in a circle:
+const center = { x: 0, z: 0 };
+const radius = 5;
+const angleIncrement = (2 * Math.PI) / 5;
+
+const coordinates = [];
+
+for (let i = 0; i < 5; i++) {
+  const angle = angleIncrement * i;
+  const x = center.x + radius * Math.cos(angle);
+  const z = center.z + radius * Math.sin(angle);
+  coordinates.push({ x, y: 0, z });
+}
+
 
 //shaders
 //sun
@@ -68,16 +108,112 @@ renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.outputEncoding = THREE.sRGBEncoding;
 
+
 //GLTF-Loader for Can
 const loader = new GLTFLoader();
 loader.load('Assets/Can.gltf', function (glb) {
 	console.log(glb);
 	const root = glb.scene;
 	root.scale.set(0.008, 0.008, 0.008);
-	root.position.x = can1.x;
-	root.position.y = can1.z;
-	root.position.z = can1.y;
+	root.position.x = coordinates[0].x;
+	root.position.y = coordinates[0].y;
+	root.position.z = coordinates[0].z;
+	root.rotation.x = can1.rx;
+	root.rotation.x = can1.rz;
+	root.rotation.x = can1.ry;
 	scene.add(root);
+	initCan(root);
+	animateCans();
+
+	model = root;
+
+}, function (xhr) {
+	console.log((xhr.loaded / xhr.total * 100) + "% loaded")
+}, function (error) {
+	console.log("An error occured")
+});
+
+loader.load('Assets/Can.gltf', function (glb) {
+	console.log(glb);
+	const root = glb.scene;
+	root.scale.set(0.008, 0.008, 0.008);
+	root.position.x = coordinates[1].x;
+	root.position.y = coordinates[1].y;
+	root.position.z = coordinates[1].z;
+	root.rotation.x = can2.rx;
+	root.rotation.x = can2.rz;
+	root.rotation.x = can2.ry;
+	scene.add(root);
+	initCan(root);
+	animateCans();
+
+	model = root;
+
+}, function (xhr) {
+	console.log((xhr.loaded / xhr.total * 100) + "% loaded")
+}, function (error) {
+	console.log("An error occured")
+});
+
+loader.load('Assets/Can.gltf', function (glb) {
+	console.log(glb);
+	const root = glb.scene;
+	root.scale.set(0.008, 0.008, 0.008);
+	root.position.x = coordinates[2].x;
+	root.position.y = coordinates[2].y;
+	root.position.z = coordinates[2].z;
+	root.rotation.x = can3.rx;
+	root.rotation.x = can3.rz;
+	root.rotation.x = can3.ry;
+	scene.add(root);
+	initCan(root);
+	animateCans();
+
+	model = root;
+
+}, function (xhr) {
+	console.log((xhr.loaded / xhr.total * 100) + "% loaded")
+}, function (error) {
+	console.log("An error occured")
+});
+
+loader.load('Assets/Can.gltf', function (glb) {
+	console.log(glb);
+	const root = glb.scene;
+	root.scale.set(0.008, 0.008, 0.008);
+	root.position.x = coordinates[3].x;
+	root.position.y = coordinates[3].y;
+	root.position.z = coordinates[3].z;
+	root.rotation.x = can4.rx;
+	root.rotation.x = can4.rz;
+	root.rotation.x = can4.ry;
+	scene.add(root);
+	initCan(root);
+	animateCans();
+
+	model = root;
+
+}, function (xhr) {
+	console.log((xhr.loaded / xhr.total * 100) + "% loaded")
+}, function (error) {
+	console.log("An error occured")
+});
+
+loader.load('Assets/Can.gltf', function (glb) {
+	console.log(glb);
+	const root = glb.scene;
+	root.scale.set(0.008, 0.008, 0.008);
+	root.position.x = coordinates[4].x;
+	root.position.y = coordinates[4].y;
+	root.position.z = coordinates[4].z;
+	root.rotation.x = can5.rx;
+	root.rotation.x = can5.rz;
+	root.rotation.x = can5.ry;
+	scene.add(root);
+	initCan(root);
+	animateCans();
+
+	model = root;
 
 }, function (xhr) {
 	console.log((xhr.loaded / xhr.total * 100) + "% loaded")
@@ -130,8 +266,25 @@ function animate() {
 	time += 1;
 	sphereMaterial.uniforms.time.value = time;
 	glowMaterial.uniforms.time.value = time;
+	scene
 	requestAnimationFrame(animate);
 	controls.update();
+	renderer.render(scene, camera);
+
+};
+
+let cans = [];
+function initCan(root) {
+	cans.push(root);
+}
+
+function animateCans() {
+	for (const can of cans) {
+		can.rotation.x = can.rotation.x + .0008;
+		can.rotation.y = can.rotation.y + .0009;
+		can.rotation.z = can.rotation.z + .0003;
+	}
+	requestAnimationFrame(animateCans);
 	renderer.render(scene, camera);
 
 };
