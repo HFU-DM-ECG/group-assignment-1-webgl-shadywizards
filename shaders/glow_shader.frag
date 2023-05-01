@@ -10,10 +10,12 @@ void main() {
     float radial = 1. - pos.z;
     radial *= radial;
 
-    float brightness = 1. + radial*0.83;
+    float brightness = 1. + radial * 0.8;
 
 
-    gl_FragColor.rgb = brightnessToColor(brightness)*radial;
+    gl_FragColor.rgb = brightnessToColor(brightness);
 
     gl_FragColor.a = radial;
+
+    // gl_FragColor = vec4(pos.z, 0., 0., 1.);
 }

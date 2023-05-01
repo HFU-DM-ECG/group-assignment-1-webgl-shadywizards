@@ -187,54 +187,13 @@ float fbm(vec4 p) {
 
     return sum;
 }
-float fbm01(vec4 p) {
-    float sum = 0.;
-    float amp = 1.;
-    float scale = 4.;
-
-    for(int i = 0; i < 3; i++) {
-        sum += cnoise(p*scale)*amp;
-        p.w += 50.; //offset each layer of noise in time
-        amp *= 0.9; //lower ampitude for each layer => less bright
-        scale *= 6.;
-    }
-
-    return sum;
-}
-
-vec3 burn_effect_00(vec3 pos, float t) {
-    vec4 p = vec4(pos*5., t);
-    float noisy = fbm(p);
-    vec3 color = vec3(.95, .51, .25) * noisy;
-
-    return color;
-}
-vec3 burn_effect_01(vec3 pos, float t) {
-    vec4 p = vec4(pos, t);
-    float noisy = fbm01(p);
-    vec3 color = vec3(.95, .51, .25) * noisy;
-
-    return color;
-}
-
-float create_spots(vec3 pos, float t) {
-    vec4 p1 = vec4(pos, t);
-    float spots = max(cnoise(p1), 0.);
-
-    return spots;
-}
 
 void main() {
-    // vec3 color = burn_effect_00(gridPos, time*0.0008);
-    // color += burn_effect_01(gridPos, time*0.0004);
-    // float spots = create_spots(gridPos, time*0.001);
-
     float brightness = fbm(vec4(gridPos*5., time*0.0008));
     float fres = Fresnel(eyeVector, vNormal);
-    brightness += pow(fres, 0.1);
+    brightness += pow(fres, 0.01);
 
     vec3 color = brightnessToColor(brightness);
 
     gl_FragColor = vec4(color, 1.0);
-    // gl_FragColor *= mix(1., spots, 0.1);
 }

@@ -114,7 +114,7 @@ const glowSphere = new THREE.Mesh(glowGeometry, glowMaterial);
 glowSphere.position.x = sun.x;
 glowSphere.position.y = sun.z;
 glowSphere.position.z = sun.y;
-scene.add(glowSphere);
+// scene.add(glowSphere);
 
 //Orbitcontrols
 const controls = new OrbitControls(camera, renderer.domElement);
