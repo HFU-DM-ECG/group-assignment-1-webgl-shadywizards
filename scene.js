@@ -60,10 +60,10 @@ const angleIncrement = (2 * Math.PI) / 5;
 const coordinates = [];
 
 for (let i = 0; i < 5; i++) {
-  const angle = angleIncrement * i;
-  const x = center.x + radius * Math.cos(angle);
-  const z = center.z + radius * Math.sin(angle);
-  coordinates.push({ x, y: 0, z });
+	const angle = angleIncrement * i;
+	const x = center.x + radius * Math.cos(angle);
+	const z = center.z + radius * Math.sin(angle);
+	coordinates.push({ x, y: 0, z });
 }
 
 //shaders
@@ -92,8 +92,8 @@ new RGBELoader()
 		//scene.environment = texture;
 	});
 new RGBELoader().load("Assets/can.hdr", function (texture) {
-		texture.mapping = THREE.EquirectangularReflectionMapping;
-		scene.environment = texture;
+	texture.mapping = THREE.EquirectangularReflectionMapping;
+	scene.environment = texture;
 });
 
 
@@ -161,7 +161,7 @@ loader.load('Assets/Can.gltf', function (glb) {
 	root.rotation.x = can2.rx;
 	root.rotation.x = can2.rz;
 	root.rotation.x = can2.ry;
-	
+
 	//metallic effect on can
 	const generator = new THREE.PMREMGenerator(renderer);
 	const envMap = generator.fromScene(scene, 0, 0.1, 100);
@@ -198,7 +198,7 @@ loader.load('Assets/Can.gltf', function (glb) {
 	root.rotation.x = can3.rx;
 	root.rotation.x = can3.rz;
 	root.rotation.x = can3.ry;
-	
+
 	//metallic effect on can
 	const generator = new THREE.PMREMGenerator(renderer);
 	const envMap = generator.fromScene(scene, 0, 0.1, 100);
@@ -235,7 +235,7 @@ loader.load('Assets/Can.gltf', function (glb) {
 	root.rotation.x = can4.rx;
 	root.rotation.x = can4.rz;
 	root.rotation.x = can4.ry;
-	
+
 	//metallic effect on can
 	const generator = new THREE.PMREMGenerator(renderer);
 	const envMap = generator.fromScene(scene, 0, 0.1, 100);
@@ -272,7 +272,7 @@ loader.load('Assets/Can.gltf', function (glb) {
 	root.rotation.x = can5.rx;
 	root.rotation.x = can5.rz;
 	root.rotation.x = can5.ry;
-	
+
 	//metallic effect on can
 	const generator = new THREE.PMREMGenerator(renderer);
 	const envMap = generator.fromScene(scene, 0, 0.1, 100);
@@ -335,7 +335,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 controls.autoRotate = true;
 controls.enablePan = false;
 controls.minDistance = 2;
-controls.maxDistance = 10;
+controls.maxDistance = 15;
 controls.maxPolarAngle = Math.PI;
 controls.update()
 
@@ -360,7 +360,7 @@ function animateCans() {
 	for (const can of cans) {
 		canCounter += 1;
 		const time = Date.now();
-  	const offsetTime = time + 500;
+		const offsetTime = time + 500;
 
 		can.rotation.x = can.rotation.x + .0008;
 		can.rotation.y = can.rotation.y + .0009;
